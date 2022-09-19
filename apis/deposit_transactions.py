@@ -5,6 +5,7 @@ from utils.update_account_balance import make_transaction
 def deposit_transaction(**kwargs):
     
     uuid = kwargs.get('uuid', generate_uuid())
+    
     origin_account = kwargs.get('origin_account')
     destination_account = kwargs.get('destination_account', None)
     channel = kwargs.get('channel') # iOS, Android, Web

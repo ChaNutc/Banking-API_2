@@ -7,6 +7,7 @@ from apis.withdraw_transactions import withdraw_transaction
 def transfer_transaction(**kwargs):
     
     uuid = generate_uuid()
+
     origin_account = kwargs.get('origin_account')
     destination_account = kwargs.get('destination_account')
     channel = kwargs.get('channel') # iOS, Android, Web
@@ -14,9 +15,11 @@ def transfer_transaction(**kwargs):
     description = kwargs.get('description', None)
     parent_id = kwargs.get('parent_id', None) # related uuid
 
-    if origin_account == destination_account:
+    if origin_account == destination_account: 
+        # Cannot transfer to same account
         raise HTTPException(status_code=400)
-    find_account(destination_account)
+
+    find_account(destination_account)# find account is in db
 
     withdraw = withdraw_transaction(
                     uuid = uuid, 

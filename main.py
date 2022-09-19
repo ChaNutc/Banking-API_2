@@ -92,5 +92,22 @@ async def retrive_balance(payload:Balancepayload):
 async def history(payload:Historypayload):
     return retrive_history(payload.account_number)
 
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    openapi_schema = get_openapi(
+        title="aot_sawasdee_appstore_downloads_country_androids",
+        version="1.0.0",
+        description="This is a very custom OpenAPI schema",
+        routes=app.routes,
+    )
+    openapi_schema["info"]["x-logo"] = {
+        "url": "https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png"
+    }
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")
+
+app.openapi = custom_openapi

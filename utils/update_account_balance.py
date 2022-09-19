@@ -5,7 +5,9 @@ from datetime import datetime
 from configs.db_config import connect
 
 def make_transaction(**kwargs):
+    #log transaction
     session = connect()
+
     uuid = kwargs.get('uuid')
     origin_account = kwargs.get('origin_account')
     destination_account = kwargs.get('destination_account', None)
@@ -17,8 +19,10 @@ def make_transaction(**kwargs):
     parent_id = kwargs.get('parent_id', None) # related uuid
     timestamp = datetime.now()
 
+    # update balance in account
     update_balance(session, origin_account, amount)
 
+    # insert new transaction log
     trans = Transaction(
         transaction_id = uuid, 
         datetime = timestamp, 
@@ -42,5 +46,6 @@ def make_transaction(**kwargs):
         raise HTTPException(status_code=400)
 
 def update_balance(session, account_number, amount):
+    # update balance in account
     session.query(Account).filter(Account.account_number == account_number).\
         update({Account.balance:amount+Account.balance}, synchronize_session = False)

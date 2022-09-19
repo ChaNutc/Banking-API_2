@@ -31,4 +31,7 @@ To install the libraries in requirements.txt:
 ### Run code
 To start your application, run the Uvicorn server: ``` uvicorn main:app --reload  ```
 
+### APIs documents
+``` http://localhost:8000/docs ```
+
 ### References
