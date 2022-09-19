@@ -33,5 +33,7 @@ To start your application, run the Uvicorn server: ``` uvicorn main:app --reload
 
 ### APIs documents
 ``` http://localhost:8000/docs ```
+or
+``` http://localhost:8000/redoc ```
 
 ### References
