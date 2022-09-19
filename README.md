@@ -7,7 +7,10 @@ banking api Code Challenge
 
 First, create and activate the virtual environment: On macOS and Linux:
 #### Create the virtual environment:
+
 ```python3 -m venv env```
+
+#### Activate the virtual environment:
 
 ```source env/bin/activate```
 
